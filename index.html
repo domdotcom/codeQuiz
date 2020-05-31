@@ -17,20 +17,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<!-- 2 minute timer, minutes and seconds -->
+    <div id="timer" class="hide">
+        <div class="time">
+            <div id="minutes">2:</div>
+            <div id="seconds">00</div>
+        </div> 
+    </div>
+    
+<!-- div container for content of quiz -->
     <div class="quizContainer container-fluid ">
         <div id="quizChallenge" class="text-center">
             <h2>Coding Quiz Challenge </h2>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will be penalized with a 10 second deduction from your time!</p>
-            <button type="button" class="btn btn-success">Start Quiz</button>
+            <button type="button" class="btn btn-success" id="quizStart">Start Quiz</button>
         </div>
         
-		
-        <div class="question"></div>
-        <ul class="answerList"></ul>
-        <div class="quizMessage"></div>
-        <div class="result"></div>
-		
+       
+            <div id="question-container" class="hide" >
+              <div id="question">Question</div>
+              <div id="answer-buttons" class="btn-grid">
+                <button type="button" class="btn btn-success">answer 1</button>
+                <button type="button" class="btn btn-success">answer 2</button>
+                <button type="button" class="btn btn-success">answer 3</button>
+                <button type="button" class="btn btn-success">answer 4</button>
+              </div>
+            </div>
+        
     </div>
 
 

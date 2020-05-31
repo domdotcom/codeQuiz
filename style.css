@@ -10,3 +10,37 @@ h2{
 p{
     padding-bottom: 30px;
 }
+#timer{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top:0;
+    right:0;
+}
+.time{
+    width: 100%;
+    text-align: center;
+}
+#minutes{
+    font-size: 1em;
+    float: left;
+    margin-left: 25%;
+}
+#seconds{
+    font-size: 1em;
+    float: left;
+}
+.hide{
+    display: none;
+}
+#question-container{
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
+  }
