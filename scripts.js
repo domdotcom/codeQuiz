@@ -15,7 +15,7 @@ var randomQuestions, currentQuestion
 var gameover 
 var score = 0
 var sec = 60;
-var time = setInterval(myTimer, 1000);
+
 
 startQuizBtn.addEventListener('click', startQuiz)
 
@@ -26,14 +26,7 @@ startQuizBtn.addEventListener('click', startQuiz)
 
 
 // timer function
-function myTimer() {
-    document.getElementById('timer').innerHTML = "Timer: " + sec ;
-    sec--;
-    if (sec == -1) {
-        clearInterval(time);
-        
-    }
-}
+
 // game over, do I even need this??
 function gameOver(){
   gameover = true;
@@ -42,20 +35,28 @@ function gameOver(){
 }
 // starquiz function, quiz starts at click
 function startQuiz(){
+  var time = setInterval(myTimer, 1000);
+  function myTimer() {
+    console.log('timer working')
+      document.getElementById('timer').innerHTML = "Timer: " + sec ;
+      sec--;
+      if (sec == -1) {
+          clearInterval(time);
+          
+      }
+  }
   timerElement.classList.remove('hide')
   introTxt.classList.add('hide')
   questionDiv.classList.remove('hide')
   randomQuestions = questions.sort(() => Math.random() -0.5)
   currentQuestion = 0
   nxtQuestion()
- 
 }
 // move to next question
 function nxtQuestion(){
   resetState()
   showQuestion(randomQuestions[currentQuestion])
 }
-//
 function showQuestion(question){
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -68,16 +69,13 @@ function showQuestion(question){
   }
   button.addEventListener('click', answerSelection)
   answersElement.appendChild(button)
-})
-  
+}) 
 }
-
 function resetState() {
   while (answersElement.firstChild) {
     answersElement.removeChild(answersElement.firstChild)
   }
 }
-
 function answerSelection() {
   console.log("selected");
   if (questions[1].correct ===  true){
@@ -88,17 +86,13 @@ function answerSelection() {
     resultWrong.classList.remove('hide');
     sec = sec - 10;
   }
-
-    nxtQuestion();
-
+    setTimeout(nxtQuestion, 1000);
 }
-
 function finalScore() {
   gameover = true;
   questionDiv.classList.add('hide')
   finalscoreDisplay.classList.remove('hide')
   scoreEl.textContent = score;
-
 }
 
 
