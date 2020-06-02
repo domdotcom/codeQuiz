@@ -86,7 +86,7 @@ function answerSelection() {
   }
   else {
     resultWrong.classList.remove('hide');
-    time = sec - 10;
+    sec = sec - 10;
   }
 
     nxtQuestion();
