@@ -14,6 +14,19 @@ startQuizBtn.addEventListener('click', startQuiz)
 
 // functions needed...
 // start the quiz qith Start quiz button
+var sec = 120;
+
+var time = setInterval(myTimer, 1000);
+
+function myTimer() {
+    document.getElementById('timer').innerHTML = "Timer: " + sec ;
+    sec--;
+    if (sec == -1) {
+        clearInterval(time);
+        alert("Time out!! :(");
+    }
+}
+
 function startQuiz(){
   timerElement.classList.remove('hide')
   introTxt.classList.add('hide')
