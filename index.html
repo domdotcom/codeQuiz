@@ -31,7 +31,7 @@
     <div class="quizContainer container-fluid ">
         <div id="quizChallenge" class="text-center">
             <h2>Coding Quiz Challenge </h2>
-            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will be penalized with a 10 second deduction from your time!</p>
+            <p>Try to answer the following champagne related questions within the time limit. Keep in mind that incorrect answers will be penalized with a 10 second deduction from your time!</p>
             <button type="button" class="btn btn-dark" id="quizStart">Start Quiz</button>
         </div>
 
@@ -42,8 +42,22 @@
         <button class="btn">Answer 2</button>
         <button class="btn">Answer 3</button>
         <button class="btn">Answer 4</button>
-      </div>
+      </div>  
     </div>
+    <div class='results'>
+        <p class="hide" id='correct'>Correct!</p>
+        <p class="hide" id='wrong'>Wrong!</p>
+    </div>
+    </div>
+
+    <div id = "finalScore" class = "hide">
+        <h3> All DONE !</h3>
+        <p>  Final Score: <span id = 'score'>0 </span></p>
+        <form id = "username">
+            <label>Players' Name </label>
+            <input type="text" id="userinput"/>
+            <input type = "button" value = "Submit" id ="submitName"/>
+        </form>
     </div>
 
     <script src="scripts.js"></script>

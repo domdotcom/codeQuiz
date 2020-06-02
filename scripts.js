@@ -1,32 +1,46 @@
 // variables
-const startQuizBtn = document.getElementById('quizStart')
-const introTxt = document.getElementById('quizChallenge')
-const timerElement = document.getElementById('timer')
-const questionDiv = document.getElementById('questionAnswerContainer')
-const questionElement = document.getElementById('question')
-const answersElement = document.getElementById('answerBtns')
+var startQuizBtn = document.getElementById('quizStart')
+var introTxt = document.getElementById('quizChallenge')
+var timerElement = document.getElementById('timer')
+var questionDiv = document.getElementById('questionAnswerContainer')
+var questionElement = document.getElementById('question')
+var answersElement = document.getElementById('answerBtns')
+var resultCorrect = document.getElementById('correct')
+var resultWrong = document.getElementById('wrong')
+var scoreEl = document.getElementById('score')
+var finalScore = document.getElementById('finalScore')
 
 
-let randomQuestions, currentQuestion
+var randomQuestions, currentQuestion
+var gameover 
+var score = 0
+var sec = 60;
+var time = setInterval(myTimer, 1000);
 
 startQuizBtn.addEventListener('click', startQuiz)
 
 
 // functions needed...
 // start the quiz qith Start quiz button
-var sec = 120;
 
-var time = setInterval(myTimer, 1000);
 
+
+// timer function
 function myTimer() {
     document.getElementById('timer').innerHTML = "Timer: " + sec ;
     sec--;
     if (sec == -1) {
         clearInterval(time);
-        alert("Time out!! :(");
+        
     }
 }
+// game over, do I even need this??
+function gameOver(){
+  gameover = true;
 
+
+}
+// starquiz function, quiz starts at click
 function startQuiz(){
   timerElement.classList.remove('hide')
   introTxt.classList.add('hide')
@@ -36,17 +50,17 @@ function startQuiz(){
   nxtQuestion()
  
 }
-
+// move to next question
 function nxtQuestion(){
   resetState()
   showQuestion(randomQuestions[currentQuestion])
 }
-
+//
 function showQuestion(question){
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
-  const button = document.createElement('button')
-  button.innerText = answer.text
+  var button = document.createElement('button')
+  button.innerText = answer.choice
   button.classList.add('btn')
   button.className = 'btn-dark'
   if (answer.correct) {
@@ -65,101 +79,121 @@ function resetState() {
 }
 
 function answerSelection() {
+  console.log("selected");
+  if (questions[1].correct ===  true){
+    resultCorrect.classList.remove('hide');
+    score++;
+  }
+  else {
+    resultWrong.classList.remove('hide');
+    time = sec - 10;
+  }
+
+    nxtQuestion();
+
+}
+
+function finalScore() {
+  gameover = true;
+  questionDiv.classList.add('hide')
+  finalscoreDisplay.classList.remove('hide')
+  scoreEl.textContent = score;
 
 }
 
 
 
+
 // quiz questions
-const questions = [
-  {
-    question: "How would you display 'Hello World' in an alert?",
+var questions = [
+{
+    question: "Which is NOT a main grape of Champagne?",
       answers: [
-        {text: "msg('Hello World')", correct: false},
-        {text: "alert('Hello World');", correct: true},
-        {text: "alertBox('Hello World');", correct: false},
-        {text: "send(Hello World)", correct: false}
+        {choice: "Pinot Noir", correct: false},
+        {choice: "Chardonnay", correct: false},
+        {choice: "Meunier", correct: false},
+        {choice: "Sauvignon Blanc", correct: true}
       ]
   },
   {
-    question: "Commonly used data types DO NOT include: ",
+    question: "Which region is the village of Cramant located? ",
       answers: [
-        {text: "booleans", correct: false},
-        {text: "strings", correct: false},
-        {text: "alerts", correct: true},
-        {text: "numbers", correct: false}
+        {choice: "The Aube", correct: false},
+        {choice: "Coteaux sud d'Epernay", correct: false},
+        {choice: "Cote de Blancs", correct: true},
+        {choice: "Bordeaux", correct: false}
       ]
     },
   {
-    question: "Arrays in Javascript can be used to store the following: ",
+    question: "How many months must vintage champagne be aged before release? ",
       answers: [
-        {text: "other arrays", correct: false},
-        {text: "numbers and strings", correct: false},
-        {text: "booleans", correct: false},
-        {text: "all of the above", correct: true}
+        {choice: "9", correct: false},
+        {choice: "12", correct: false},
+        {choice: "64", correct: false},
+        {choice: "36", correct: true}
       ]
     },
   {
-    question: "What will this output? var a = [1, 2, 3]; console.log(a[6]);",
+    question: "What is the tete de cuvee of Billecart-Salmon?",
       answers: [
-        {text: "undefined", correct: true},
-        {text: "6", correct: false},
-        {text: "NaN", correct: false},
-        {text: "syntax error", correct: false}
+        {choice: "Cristal", correct: false},
+        {choice: "Clos de Goisses", correct: false},
+        {choice: "Cuvee Nicolas Francois", correct: true},
+        {choice: "Le Grand Annee", correct: false}
       ]
     },
   {
-    question: "What is the condition in an if/else statment enclosed in?",
+    question: "Which of these historical figures has a champgane named after them?",
       answers: [
-        {text: "square brackets", correct: false},
-        {text: "single quotes", correct: false},
-        {text: "nothing", correct: false},
-        {text: "parenthesis", correct: true}
+        {choice: "Joan of Arc", correct: false},
+        {choice: "Marie Antoinette", correct: false},
+        {choice: "Sir Winston Churchill", correct: true},
+        {choice: "Mata Hari", correct: false}
       ]
     },
   {
-    question: "What does the following selector: $('div') select?",
+    question: "A champagne producer who grows their own grapes and makes their own wine from those grapes is known as what?",
       answers: [
-        {text: "first div element", correct: false},
-        {text: "all div elements", correct: true},
-        {text: "last div element", correct: false},
-        {text: "not a selector", correct: false}
+        {choice: "winemaker", correct: false},
+        {choice: "grower producer", correct: true},
+        {choice: "french", correct: false},
+        {choice: "a farmer", correct: false}
       ]
     },
   {
-    question: "Which is a useful tool during development and debugging for printing content to the debugger?",
+    question: "Who is credited with inventing the process of riddling?",
       answers: [
-        {text: "terminal.bash", correct: false},
-        {text: "for loops", correct: false},
-        {text: "Java", correct: false},
-        {text: "console.log", correct: true}
+        {choice: "Dom Perignon", correct: false},
+        {choice: "Louis XIV", correct: false},
+        {choice: "Sir Winston Churchill", correct: false},
+        {choice: "Madame Cliquot", correct: true}
       ]
     },
   {
-    question: "Which for loop runs from 0 to 9?",
+    question: "A blanc de noir is chamapgne made from what grapes?",
       answers: [
-        {text: "for (i=0: i<10; i++)", correct: false},
-        {text: "for (i<10; i = 0; i++)", correct: false},
-        {text: "for (i = 0; i < 10; i++)", correct: true},
-        {text: "for (i =0, i < 10, i+)", correct: false}
+        {choice: "white grapes", correct: false},
+        {choice: "white and red grapes", correct: false},
+        {choice: "red grapes", correct: true},
+        {choice: "very ripe grapes", correct: false}
       ]
     },
   {
-  question: "What is the proper syntax for calling a function?",
+  question: "What is a brut nature champagne?",
     answers: [
-      {text: "myFunction();", correct: true},
-      {text: "callMyFunction;", correct: false},
-      {text: "function myFunction();", correct: false},
-      {text: "myFunction;", correct: false}
+      {choice: "champagne with less than 3g/L of sugar", correct: true},
+      {choice: "champagne with more than 3 g/L of sugar", correct: false},
+      {choice: "all natural champagne", correct: false},
+      {choice: "champagne that has gone bad", correct: false}
     ]
   },
   {
-    question: "Use the correct Array method to remove the last item of this array; fruits : ['mango', 'kiwi', 'apple', 'guava'].",
+    question: "The cote de blanc is knwon for what type of soils?",
       answers: [
-        {text: "remove(last);", correct: false},
-        {text: "fruits[3-1];", correct: false},
-        {text: "fruits.pop();", correct: true},
-        {text: "fruits(pop)", correct: false}
+        {choice: "dry soils", correct: false},
+        {choice: "irrigated soils", correct: false},
+        {choice: "chalky soils", correct: true},
+        {choice: "clay soils", correct: false}
       ]
     }
   ]
