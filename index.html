@@ -24,27 +24,27 @@
             <div id="seconds">00</div>
         </div> 
     </div>
-    
-<!-- div container for content of quiz -->
+    <div>
+        <a class = "btn btn-dark" id="highScoreBtn" href="highscores.html">High Scores</a>
+    </div>
+
     <div class="quizContainer container-fluid ">
         <div id="quizChallenge" class="text-center">
             <h2>Coding Quiz Challenge </h2>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will be penalized with a 10 second deduction from your time!</p>
-            <button type="button" class="btn btn-success" id="quizStart">Start Quiz</button>
+            <button type="button" class="btn btn-dark" id="quizStart">Start Quiz</button>
         </div>
-              
-        <div id="question-container" class="hide" >
-            <div id="question">Question</div>
-            <div id="answerBtns" class="btn-grid">
-            <!-- <button type="button" class="btn ">answer 1</button>
-            <button type="button" class="btn ">answer 2</button>
-            <button type="button" class="btn ">answer 3</button>
-            <button type="button" class="btn ">answer 4</button> -->
-            </div>
-        </div>
-        
-    </div>
 
+    <div class=" container-fluid hide" id="questionAnswerContainer" >
+        <div id="question">Question</div>
+        <div id="answerBtns" class="btn-grid">
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button>
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
+      </div>
+    </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>

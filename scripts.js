@@ -2,12 +2,12 @@
 const startQuizBtn = document.getElementById('quizStart')
 const introTxt = document.getElementById('quizChallenge')
 const timerElement = document.getElementById('timer')
-const questionDiv = document.getElementById('question-container')
+const questionDiv = document.getElementById('questionAnswerContainer')
 const questionElement = document.getElementById('question')
-const answerElement = document.getElementById('answerBtns')
+const answersElement = document.getElementById('answerBtns')
 
 
-let questionsRandom, currentQuestion
+let randomQuestions, currentQuestion
 
 startQuizBtn.addEventListener('click', startQuiz)
 
@@ -15,66 +15,46 @@ startQuizBtn.addEventListener('click', startQuiz)
 // functions needed...
 // start the quiz qith Start quiz button
 function startQuiz(){
-  // console.log('Started');
-  startQuizBtn.classList.add('hide')
-  introTxt.classList.add('hide')
   timerElement.classList.remove('hide')
+  introTxt.classList.add('hide')
   questionDiv.classList.remove('hide')
+  randomQuestions = questions.sort(() => Math.random() -0.5)
   currentQuestion = 0
-  questionsRandom = questions.sort(() => Math.random() - 0.5)
   nxtQuestion()
+ 
 }
 
 function nxtQuestion(){
   resetState()
-  showQuestion(questionsRandom[currentQuestion])
-
+  showQuestion(randomQuestions[currentQuestion])
 }
+
 function showQuestion(question){
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.className = 'btn-success'
-    button.innerText = answer.text
-    button.classList.add('btn')
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
-    }
-
-    button.addEventListener('click', answerSelection)
-    answerElement.appendChild(button)
-  })
+  const button = document.createElement('button')
+  button.innerText = answer.text
+  button.classList.add('btn')
+  button.className = 'btn-dark'
+  if (answer.correct) {
+    button.dataset.correct = answer.correct
+  }
+  button.addEventListener('click', answerSelection)
+  answersElement.appendChild(button)
+})
+  
 }
-// reset everything in between questions
-function resetState(){
-  while (answerElement.firstChild) {
-    answerElement.removeChild(answerElement.firstChild)
+
+function resetState() {
+  while (answersElement.firstChild) {
+    answersElement.removeChild(answersElement.firstChild)
   }
 }
 
-function answerSelection(){
-  const selected = e.target
-  const correct = selected.data.correct
-  setStatusClass(document.body, correct)
-  Array.from(answerElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-  })
-  if (questionsRandom.length > )
+function answerSelection() {
+
 }
 
-function setStatusClass(element, correct) {
-  clearStatusClass(element)
-  if (correct) {
-    element.classList.add('correct')
-  } else{
-    element.classList.add('wrong')
-  }
-}
-
-function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
-}
 
 
 // quiz questions
@@ -170,10 +150,4 @@ const questions = [
       ]
     }
   ]
-
-
-
-  //  
-
-
 
