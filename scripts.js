@@ -8,10 +8,12 @@ var answersElement = document.getElementById('answerBtns')
 var resultCorrect = document.getElementById('correct')
 var resultWrong = document.getElementById('wrong')
 var scoreEl = document.getElementById('score')
-var finalScore = document.getElementById('finalScore')
+var finalscoreDisplay = document.getElementById('finalScore')
+var resultsElement = document.getElementById('results')
 
 
-var randomQuestions, currentQuestion
+var randomQuestions
+var currentQuestion = 0
 var gameover 
 var score = 0
 var sec = 60;
@@ -40,9 +42,11 @@ function startQuiz(){
     console.log('timer working')
       document.getElementById('timer').innerHTML = "Timer: " + sec ;
       sec--;
-      if (sec == -1) {
-          clearInterval(time);
-          
+      if (sec === -1) {
+          clearInterval(time);         
+      }
+      if (sec < 1) {
+        finalScore();
       }
   }
   timerElement.classList.remove('hide')
@@ -55,11 +59,12 @@ function startQuiz(){
 // move to next question
 function nxtQuestion(){
   resetState()
-  showQuestion(randomQuestions[currentQuestion])
+  showQuestion();
 }
 function showQuestion(question){
-  questionElement.innerText = question.question
-  question.answers.forEach(answer => {
+  currentQuestion++;
+  questionElement.innerText = questions[currentQuestion].question
+  questions[currentQuestion].answers.forEach(answer => {
   var button = document.createElement('button')
   button.innerText = answer.choice
   button.classList.add('btn')
@@ -80,16 +85,21 @@ function answerSelection(event) {
   console.log("selected");
   if (event.currentTarget.getAttribute('data-correct') === 'true'){
     resultCorrect.classList.remove('hide');
+    resultWrong.classList.add('hide');
     score++;
   }
   else {
     resultWrong.classList.remove('hide');
+    resultCorrect.classList.add('hide');
     sec = sec - 10;
+
   }
-    setTimeout(nxtQuestion, 1000);
+    nxtQuestion();
+   
 }
 function finalScore() {
   gameover = true;
+  resultsElement.classList.add('hide')
   questionDiv.classList.add('hide')
   finalscoreDisplay.classList.remove('hide')
   scoreEl.textContent = score;
