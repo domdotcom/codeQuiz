@@ -76,9 +76,9 @@ function resetState() {
     answersElement.removeChild(answersElement.firstChild)
   }
 }
-function answerSelection() {
+function answerSelection(event) {
   console.log("selected");
-  if (questions[1].correct ===  true){
+  if (event.currentTarget.getAttribute('data-correct') === 'true'){
     resultCorrect.classList.remove('hide');
     score++;
   }
@@ -100,14 +100,15 @@ function finalScore() {
 
 // quiz questions
 var questions = [
-{
+  {
     question: "Which is NOT a main grape of Champagne?",
-      answers: [
-        {choice: "Pinot Noir", correct: false},
-        {choice: "Chardonnay", correct: false},
-        {choice: "Meunier", correct: false},
-        {choice: "Sauvignon Blanc", correct: true}
-      ]
+    answers:
+    [
+      {choice: "Pinot Noir", correct: false},
+      {choice: "Chardonnay", correct: false},
+      {choice: "Meunier", correct: false},
+      {choice: "Sauvignon Blanc", correct: true}
+    ]
   },
   {
     question: "Which region is the village of Cramant located? ",
