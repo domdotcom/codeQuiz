@@ -17,6 +17,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<div id="initiaPage">
 <!-- 2 minute timer, minutes and seconds -->
     <div id="timer" class="hide">
         <div class="time">
@@ -24,9 +26,9 @@
             <div id="seconds"></div>
         </div> 
     </div>
-    <div>
+    <!-- <div>
         <a class = "btn btn-dark" id="highScoreBtn" href="highscores.html">High Scores</a>
-    </div>
+    </div> -->
 
     <div class="quizContainer container-fluid ">
         <div id="quizChallenge" class="text-center">
@@ -49,16 +51,25 @@
         <p class="hide" id='wrong'>Wrong!</p>
     </div>
     </div>
+</div>
+    
+<div id = "finalScore" class = "hide">
+    <h3> All DONE !</h3>
+    <p>  Final Score: <span id = 'score'>0 </span></p>
+    <form id = "username">
+        <label>Players' Name </label>
+        <input type="text" id="userinput"/>
+        <input type = "button" value = "Submit" id ="submitName"/>
+    </form>
+</div>
 
-    <div id = "finalScore" class = "hide">
-        <h3> All DONE !</h3>
-        <p>  Final Score: <span id = 'score'>0 </span></p>
-        <form id = "username">
-            <label>Players' Name </label>
-            <input type="text" id="userinput"/>
-            <input type = "button" value = "Submit" id ="submitName"/>
-        </form>
-    </div>
+<div id = "highscore" class = 'hide'>
+    <h3> High Score List </h3>
+    <ul id ="playerlist"></ul>
+    <form id = "menu">
+        <input type = "button" value = "GoBack" id = "goBackButton"/>
+    </form>
+</div>
 
     <script src="scripts.js"></script>
 </body>

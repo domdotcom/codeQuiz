@@ -10,6 +10,12 @@ var resultWrong = document.getElementById('wrong')
 var scoreEl = document.getElementById('score')
 var finalscoreDisplay = document.getElementById('finalScore')
 var resultsElement = document.getElementById('results')
+var submitNameElement = document.getElementById('submitName')
+var userinputEl = document.getElementById('userinput')
+var playerListDisplay = document.getElementById('playerlist')
+var highscoreDisplay = document.getElementById('highscore')
+var initialPage = document.getElementById('initialPage')
+var gobackbutton = document.getElementById('goBackButton')
 
 
 var randomQuestions
@@ -17,6 +23,7 @@ var currentQuestion = 0
 var gameover 
 var score = 0
 var sec = 60;
+var playerList = [{name:'', score:''}];
 
 
 startQuizBtn.addEventListener('click', startQuiz)
@@ -42,7 +49,7 @@ function startQuiz(){
     console.log('timer working')
       document.getElementById('timer').innerHTML = "Timer: " + sec ;
       sec--;
-      if (sec === -1) {
+      if (sec === 0) {
           clearInterval(time);         
       }
       if (sec < 1) {
@@ -92,10 +99,9 @@ function answerSelection(event) {
     resultWrong.classList.remove('hide');
     resultCorrect.classList.add('hide');
     sec = sec - 10;
-
   }
     nxtQuestion();
-   
+
 }
 function finalScore() {
   gameover = true;
@@ -105,7 +111,40 @@ function finalScore() {
   scoreEl.textContent = score;
 }
 
+submitNameElement.addEventListener("click", function (event){
+  event.preventDefault();
+  event.stopPropagation();
+  finalscoreDisplay.classList.add('hide')
+  addPersonToList();
+  highscoreDisplay.classList.remove('hide')
+  renderHighscore();
+})
 
+function addPersonToList() {
+  event.preventDefault();
+  var name = userinputEl.value;
+  playerList.push({ "name": name, "score": score }); 
+}
+
+function renderHighscore () {
+  var name = userinputEl.value;
+  var li = document.createElement("li");
+  li.id = playerList.length;
+  li.textContent = name + ":  " + score;
+  playerListDisplay.append(li);
+}
+
+gobackbutton.addEventListener('click', goBack);
+
+function goBack () {
+  highscoreDisplay.classList.add('hide')
+  initialPage. style.display ='block';
+  score=0;
+  currentQuestion=0;
+  totalSeconds = 0;
+  scoreEl.textContent = 0; 
+  userinputEl.value=""; 
+}
 
 
 // quiz questions
